@@ -8,6 +8,7 @@ async function run() {
   let rbac = core.getInput("rbac");
   let dns = core.getInput("dns");
   let storage = core.getInput("storage");
+  let registry = core.getInput("registry");
 
   console.log("install microk8s..")
   sh.exec("sudo snap install microk8s --classic --channel=" + channel );
@@ -17,7 +18,7 @@ async function run() {
   enableOrDisableRbac(rbac);
   enableOrDisableDns(dns);
   enableOrDisableStorage(storage);
-
+  enableOrDisableRegistry(registry);
 }
 
 async function waitForReadyState() {
@@ -70,6 +71,16 @@ function enableOrDisableStorage(storage: string) {
     console.log("Start enabling storage.");
     waitForReadyState()
     sh.exec("sudo microk8s enable storage");
+    waitForReadyState()
+  }
+
+}
+
+function enableOrDisableRegistry(storage: string) {
+  if (storage.toLowerCase() === "true") {
+    console.log("Start enabling registry.");
+    waitForReadyState()
+    sh.exec("sudo microk8s enable registry");
     waitForReadyState()
   }
 

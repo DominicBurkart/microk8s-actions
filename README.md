@@ -30,6 +30,10 @@ This Github Actions enables one to test their applications on multiple Kubernete
 
 **Required** Since MicroK8s does not enable `storage` by default, user can choose whether they want to enable local hostPath storage or not.
 
+### `registry`
+
+**Required** Since MicroK8s does not enable `registry` by default, user can choose whether they want to enable using a local registry or not.
+
 ## Example Usage:
 
 Below shows how one can use the Action.
